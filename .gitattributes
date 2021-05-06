@@ -1,2 +1,0 @@
-README.md filter=lfs diff=lfs merge=lfs -text
-scenario3-training-dataset-transformed-tf_copy.csv filter=lfs diff=lfs merge=lfs -text
