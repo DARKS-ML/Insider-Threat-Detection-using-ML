@@ -33,7 +33,8 @@ def exportFile(df,file_name):
         exportFile(dataframeName,file_name)
 
     '''
-    df.to_csv(r'/home/iamdpk/Project Work/Dataset/'+file_name+'_copy.csv',index=False)
+    df.to_csv(r'/home/iamdpk/Project Work/Insider-Threat-Detection-using-ML/Dataset/'+file_name+'_copy.csv',index=False)
+#     /home/iamdpk/Project Work/Insider-Threat-Detection-using-ML/Dataset/r3.2/
     print(f'Exporting {file_name}_copy.csv is Done !')
 
 
