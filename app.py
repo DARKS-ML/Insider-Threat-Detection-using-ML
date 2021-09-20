@@ -39,7 +39,15 @@ def index():
     values9 = list(df.ascore)
     values10 = list(df.threat)
 
+
+    df = pd.read_csv('output/email_result.csv')
+    legend = 'USER vs Async Score'
+    legend1 = "User vs Threat Confirmation"
+    labels6 = list(df.user)
+    values11 = list(df.ascore)
+    values12 = list(df.threat)
+
     
-    return render_template('index.html', values1=values1, labels1=labels1, legend=legend,values2=values2, legend1=legend1, labels2=labels2, values3=values3,values4=values4, labels3=labels3, values5=values5,values6=values6, labels4=labels4, values7=values7,values8=values8, labels5=labels5, values9=values9,values10=values10)
+    return render_template('index.html', values1=values1, labels1=labels1, legend=legend,values2=values2, legend1=legend1, labels2=labels2, values3=values3,values4=values4, labels3=labels3, values5=values5,values6=values6, labels4=labels4, values7=values7,values8=values8, labels5=labels5, values9=values9,values10=values10, labels6=labels6, values11=values11,values12=values12)
 if __name__ == "__main__":
     app.run(debug=True)
