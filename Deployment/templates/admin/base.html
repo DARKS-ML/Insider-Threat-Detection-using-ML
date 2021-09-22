@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
   <title>{% block title %}{% if admin_view.category %}{{ admin_view.category }} - {% endif %}{{ admin_view.name }} - {{ admin_view.admin.name }}{% endblock title%}</title>
 
   {% block head_meta %}
@@ -26,7 +27,7 @@
   <link href="{{url_for('static',filename='css/skins/_all-skins.min.css')}}" rel="stylesheet"></link>
   <!-- iCheck -->
   <link href="{{url_for('static',filename='plugins/iCheck/flat/blue.css')}}" rel="stylesheet"></link>
-  
+
   <!-- bootstrap wysihtml5 - text editor -->
   <link href="{{url_for('static',filename='plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}" rel="stylesheet"></link>
   <!-- Flask-admin admin styles -->
@@ -44,9 +45,18 @@
 
   {% block head_tail %}
   {% endblock head_tail%}
-
+<style>
+/* *,body,h1{
+  background-color: #000000;
+  color:#fff;
+} */
+*,.custom_color,.main-footer{
+    background-color: #f2f2f2;
+    color:#000000;
+}
+</style>
 </head>
-<body class="hold-transition skin-green sidebar-all">
+<body class="hold-transition sidebar-all" >
 
   {% block page_body %}
 
@@ -65,13 +75,13 @@
       {% endblock brand%}
 
       <!-- Header Navbar: style can be found in header.less -->
-      <nav class="navbar navbar-static-top">
+      <nav class="navbar navbar-static-top ">
         <!-- Sidebar toggle button-->
         <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
           <span class="sr-only">Toggle navigation</span>
         </a>
 
-        <div class="navbar-custom-menu">
+        <div class="navbar-custom-menu custom_color" >
           <ul class="nav navbar-nav">
             <!-- Notifications: style can be found in dropdown.less -->
             <li class="dropdown notifications-menu">
@@ -103,7 +113,7 @@
                       <a href="#">
                         <i class="fa fa-warning text-yellow"></i> {{file}}                      </a>
                     </li>
-                    
+
                   </ul>
                 </li>
                 <li class="footer"><a href="#">View all</a></li>
@@ -132,7 +142,7 @@
     <!-- / TOP NAVBAR -->
 
     <!-- LEFT MENU -->
-    <aside class="main-sidebar">
+    <aside class="main-sidebar ">
       <!-- sidebar: style can be found in sidebar.less -->
       <section class="sidebar">
         <!-- Sidebar user panel -->
@@ -151,36 +161,27 @@
            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
          </div>
        </div>
-       <!-- search form -->
-       <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-          <span class="input-group-btn">
-            <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-            </button>
-          </span>
-        </div>
-      </form>
-      <!-- /.search form -->
+
+  <hr>
       <!-- sidebar menu: : style can be found in sidebar.less -->
-      <ul class="sidebar-menu">
-        <li class="header">MAIN NAVIGATION</li>
+      <ul class="sidebar-menu" >
+        <h5 class="header" >&nbsp;&nbsp;&nbsp;&nbsp;MAIN NAVIGATION</h5>
         {% block main_menu %}
         {{ layout.menu() }}
         {% endblock %}
         <li>
           <a href="#">
-            <i class="fa fa-envelope"></i> <span>email</span>
+            <i class="fa fa-address-card"></i> <span>Details</span>
           </a>
         </li>
-        <li class="treeview">
+        <!-- <li class="treeview">
           <a href="#">
             <i class="fa fa-share"></i> <span>Multilevel</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-        </li>
+        </li> -->
       </ul>
     </section>
     <!-- /.sidebar -->
@@ -207,7 +208,7 @@
   <!-- / Content Wrapper. color white -->
 
   <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
+  <aside class="control-sidebar ">
     <!-- Tab panes -->
     <div class="tab-content">
       <!-- Settings tab content -->
@@ -252,10 +253,7 @@
   <div class="control-sidebar-bg"></div>
 
   <footer class="main-footer">
-     <strong>Copyright &copy; 2021 <a href="#">DARKS</a></strong> -
-    <div class="pull-right hidden-xs">
-      <b>Version</b> 1.0
-    </div>
+    <center> <strong>Copyright &copy; <a href="#">DARKS</a>-<span id="demo"></span></strong>   <br>Version</b> 1.0</center>
   </footer>
   {% endif %}
 
@@ -266,7 +264,11 @@
 
 {% block tail_js %}
 
-
+<script>
+var d = new Date();
+document.getElementById("demo").innerHTML = d.getFullYear();
+AOS.init();
+</script>
 <!-- jQuery 2.2.3 -->
 <script src="{{url_for('static',filename='plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -287,9 +289,9 @@
 
 
 <!-- Bootstrap WYSIHTML5 -->
-<script src="{{url_for('static',filename='plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')}}"></script>    
+<script src="{{url_for('static',filename='plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')}}"></script>
 <!-- Slimscroll -->
-<script src="{{url_for('static',filename='plugins/slimScroll/jquery.slimscroll.min.js')}}"></script>    
+<script src="{{url_for('static',filename='plugins/slimScroll/jquery.slimscroll.min.js')}}"></script>
 
 <!-- Darks App -->
 <script src="{{url_for('static',filename='js/app.min.js')}}"></script>

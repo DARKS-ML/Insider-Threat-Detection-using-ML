@@ -82,7 +82,7 @@ class MyModelView(sqla.ModelView):
 
     # can_edit = True
     edit_modal = True
-    create_modal = True    
+    create_modal = True
     can_export = True
     can_view_details = True
     details_modal = True
@@ -102,7 +102,7 @@ class UserView(MyModelView):
 
 # class CustomView(BaseView):
 #     @expose('/')
-#     def index(self): 
+#     def index(self):
 #         return self.render('admin/custom_index.html')
 
 
@@ -157,7 +157,7 @@ def context_processor():
     values6 = list(df.ascore)
     # values10 = list(df.threat)
 
-    
+
     return dict(
         values1=values1, labels1=labels1,legend=legend,
         values2=values2,labels2=labels2,
@@ -179,8 +179,8 @@ admin = flask_admin.Admin(
 )
 
 # Add model views
-admin.add_view(MyModelView(Role, db.session, menu_icon_type='fa', menu_icon_value='fa-server', name="Roles"))
-admin.add_view(UserView(User, db.session, menu_icon_type='fa', menu_icon_value='fa-users', name="Users"))
+admin.add_view(MyModelView(Role, db.session, menu_icon_type='fa', menu_icon_value='fa-server', name="System Roles"))
+admin.add_view(UserView(User, db.session, menu_icon_type='fa', menu_icon_value='fa-users', name="System Users"))
 # admin.add_view(CustomView(name="Custom view", endpoint='custom', menu_icon_type='fa', menu_icon_value='fa-connectdevelop',))
 
 # define a context processor for merging flask-admin's template context into the
@@ -220,7 +220,7 @@ def build_sample_db():
         )
 
         first_names = []
-           
+
         last_names = []
 
         for i in range(len(first_names)):

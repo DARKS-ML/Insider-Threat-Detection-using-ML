@@ -6,7 +6,7 @@
 {% if current_user.is_authenticated %}
 
 <!-- Content Header (Page header) -->
-<section class="content-header">
+<section class="content-header" >
   <h1>
     Dashboard
     <!-- <small>{{values}}</small> -->
@@ -17,12 +17,14 @@
     <li class="active">Dashboard</li>
   </ol>
 </section>
-<section class="content">
+<section class="content" >
   <!-- Main row -->
-  <div class="row">
-    <div>
-        <canvas id="myChart4" style="height: 300px;""></canvas>
-    </div>
+      <div class="row">
+        <div>
+            <!-- <canvas id="myChart4" style="height: 300px;""></canvas> -->
+            <canvas id="myChart4" style="max-height: 300px;""></canvas>
+
+        </div>
     <!-- Left col -->
     <section class="col-lg-7 connectedSortable">
       <!-- LOgon -->
@@ -31,12 +33,14 @@
         <ul class="nav nav-tabs pull-left">
           <div class="box-header">
             <i class="fa fa-th"></i>
-            <h3 class="box-title">Logon Graph</h3>
+            <h3 class="box-title">PC Count</h3>
           </div>
         </ul>
         <div class="tab-content no-padding">
           <!-- anamoly logon -->
-          <canvas id="myChart" style="width: 300px ;height: 300px;"></canvas>
+          <canvas id="myChart" style="width: 300px ;max-height: 300px;"></canvas>
+          <!-- <canvas id="myChart" style="max-width: 300px ;max-height: 300px;"></canvas> -->
+
         </div>
       </div>
       <!--  email -->
@@ -45,52 +49,53 @@
         <ul class="nav nav-tabs pull-left">
           <div class="box-header">
             <i class="fa fa-th"></i>
-            <h3 class="box-title">Logon Graph</h3>
+            <h3 class="box-title">Device Graph</h3>
           </div>
         </ul>
         <div class="tab-content no-padding">
-          <canvas id="myChart1" style="width: 400px ;height: 300px;"></canvas>          
+          <canvas id="myChart1" style="width: 300px ;max-height: 300px;"></canvas>
         </div>
       </div>
 
     </section>
     <!-- /.Left col -->
     <!-- right col (We are only adding the ID to make the widgets sortable)-->
-    <section class="col-lg-5">
-       <div class="box box-solid">
+    <section class="col-lg-5 custom_color ">
+       <div class="box box-solid custom_color">
         <div class="box-header">
           <i class="fa fa-th"></i>
-            <h3 class="box-title">Device Graph</h3>
+            <h3 class="box-title" >psychometric</h3>
         </div>
         <div class="box-body">
           <!-- <div id="chart" style="height: 250px; width: 100%;"></div> -->
-          <canvas id="myChart2" style="width: 400px ;height: 300px;"></canvas>
+          <canvas id="myChart2" style="width: 300px ;max-height: 300px;" ></canvas>
         </div>
       </div>
       <!-- file graph -->
-      <div class="nav-tabs-custom,"></div>
-        <div class="box box-solid bg-teal-gradient">
+      <div class="nav-tabs-custom "></div>
+        <div class="box box-solid custom_color" >
           <div class="box-header">
             <i class="fa fa-th"></i>
-            <h3 class="box-title">file Graph</h3>
+            <h3 class="box-title">user log </h3>
           </div>
           <div class="box-body border-radius-none">
           <!-- <div class="chart" id="chart" style="height: 250px;"></div> -->
           <canvas id="myChart3" style="width: 400px ;height: 300px;"></canvas>
         </div>
       </div>
-    
+
     </section>
     <div class="nav-tabs-custom,">
       <!-- Tabs within a box -->
       <ul class="nav nav-tabs pull-left">
-        <div class="box-header">
+        <div class="box-header" style='float:left;'>
           <i class="fa fa-th"></i>
-          <h3 class="box-title">Email anamoly</h3>
+          <h3 class="box-title" >Email anamoly</h3>
         </div>
       </ul>
+
       <div class="tab-content no-padding">
-        <canvas id="myChart5" style="width: 400px ;height: 300px;"></canvas>          
+        <canvas id="myChart5" style="width: 400px ;max-height: 200px;"></canvas>
       </div>
     </div>
 </section>
@@ -109,7 +114,7 @@
       {% if not current_user.is_authenticated %}
       <p>You can register as a regular user, or log in as a superuser with the following credentials: <br><br>
 
-        
+
       <p>
         <a class="btn btn-primary" href="{{ url_for('security.login') }}">Login</a> <a class="btn btn-default" href="{{ url_for('security.register') }}">Register</a>
       </p>
@@ -130,7 +135,7 @@
 
 
 <script>
-  
+
   console.log('hello')
   //user pc
   var ctx = document.getElementById('myChart').getContext('2d');
@@ -211,7 +216,6 @@
             y: {
                 beginAtZero: true
             }
-            
         }
     }
 });
@@ -384,7 +388,7 @@ var ctx = document.getElementById('myChart5').getContext('2d');
 
 
   // // Chart.defaults.global.responsive = false;
-  
+
   // var chartData2 = {
   // labels : [{% for item in labels1 %}
   //          "{{item}}",
@@ -414,23 +418,23 @@ var ctx = document.getElementById('myChart5').getContext('2d');
   //   spanGaps: false
   //  }]
   // }
-  
-  
+
+
   // var ctx2 = document.getElementById("myChart2").getContext("2d");
-  
-  
-  
+
+
+
   // var myChart = new Chart(ctx2, {
   // type: 'line',
   // data: chartData2,
   // options: {
   //   responsive:true
   // }
-  
+
   // });
   // console.log(myChart)
   // Chart.defaults.global.responsive = false;
-  
+
   // var chartData3 = {
   // labels : [{% for item in labels2 %}
   //          "{{item}}",
@@ -458,13 +462,13 @@ var ctx = document.getElementById('myChart5').getContext('2d');
   //             {{item}},
   //           {% endfor %}],
   //   spanGaps: false
-  
+
   // }]
   // }
-  
+
   // var ctx3 = document.getElementById("myChart3").getContext("2d");
-  
-  
+
+
   // var myChart = new Chart(ctx3, {
   // type: 'line',
   // data: chartData3,
@@ -472,10 +476,10 @@ var ctx = document.getElementById('myChart5').getContext('2d');
   //   responsive:true
   // }
   // });
-  
-  
+
+
   // // Chart.defaults.global.responsive = false;
-  
+
   // var chartData4 = {
   // labels : [{% for item in labels2 %}
   //          "{{item}}",
@@ -503,13 +507,13 @@ var ctx = document.getElementById('myChart5').getContext('2d');
   //             {{item}},
   //           {% endfor %}],
   //   spanGaps: false
-  
+
   // }]
   // }
-  
+
   // var ctx4 = document.getElementById("myChart4").getContext("2d");
-  
-  
+
+
   // var myChart = new Chart(ctx4, {
   // type: 'line',
   // data: chartData4,
@@ -517,11 +521,11 @@ var ctx = document.getElementById('myChart5').getContext('2d');
   //   responsive:true
   // }
   // });
-  
-  
-  
+
+
+
   // // Chart.defaults.global.responsive = false;
-  
+
   // var chartData5 = {
   // labels : [{% for item in labels3 %}
   //          "{{item}}",
@@ -549,13 +553,13 @@ var ctx = document.getElementById('myChart5').getContext('2d');
   //             {{item}},
   //           {% endfor %}],
   //   spanGaps: false
-  
+
   // }]
   // }
-  
+
   // var ctx5 = document.getElementById("myChart5").getContext("2d");
-  
-  
+
+
   // var myChart = new Chart(ctx5, {
   // type: 'line',
   // data: chartData5,
@@ -563,10 +567,10 @@ var ctx = document.getElementById('myChart5').getContext('2d');
   //   responsive:true
   // }
   // });
-  
-  
+
+
   // // Chart.defaults.global.responsive = false;
-  
+
   // var chartData6 = {
   // labels : [{% for item in labels3 %}
   //          "{{item}}",
@@ -594,13 +598,13 @@ var ctx = document.getElementById('myChart5').getContext('2d');
   //             {{item}},
   //           {% endfor %}],
   //   spanGaps: false
-  
+
   // }]
   // }
-  
+
   // var ctx6 = document.getElementById("myChart6").getContext("2d");
-  
-  
+
+
   // var myChart = new Chart(ctx6, {
   // type: 'line',
   // data: chartData6,
@@ -608,11 +612,11 @@ var ctx = document.getElementById('myChart5').getContext('2d');
   //   responsive:true
   // }
   // });
-  
-  
-  
+
+
+
   // // Chart.defaults.global.responsive = false;
-  
+
   // var chartData7 = {
   // labels : [{% for item in labels4 %}
   //          "{{item}}",
@@ -640,13 +644,13 @@ var ctx = document.getElementById('myChart5').getContext('2d');
   //             {{item}},
   //           {% endfor %}],
   //   spanGaps: false
-  
+
   // }]
   // }
-  
+
   // var ctx7 = document.getElementById("myChart7").getContext("2d");
-  
-  
+
+
   // var myChart = new Chart(ctx7, {
   // type: 'line',
   // data: chartData7,
@@ -654,13 +658,13 @@ var ctx = document.getElementById('myChart5').getContext('2d');
   //   responsive:true
   // }
   // });
-  
-  
-  
-  
-  
+
+
+
+
+
   // // Chart.defaults.global.responsive = false;
-  
+
   // var chartData8 = {
   // labels : [{% for item in labels4 %}
   //          "{{item}}",
@@ -688,13 +692,13 @@ var ctx = document.getElementById('myChart5').getContext('2d');
   //             {{item}},
   //           {% endfor %}],
   //   spanGaps: false
-  
+
   // }]
   // }
-  
+
   // var ctx8 = document.getElementById("myChart8").getContext("2d");
-  
-  
+
+
   // var myChart = new Chart(ctx8, {
   // type: 'line',
   // data: chartData8,
@@ -702,11 +706,11 @@ var ctx = document.getElementById('myChart5').getContext('2d');
   //   responsive:true
   // }
   // });
-  
-  
-  
+
+
+
   // // Chart.defaults.global.responsive = false;
-  
+
   // var chartData9 = {
   // labels : [{% for item in labels5 %}
   //          "{{item}}",
@@ -734,13 +738,13 @@ var ctx = document.getElementById('myChart5').getContext('2d');
   //             {{item}},
   //           {% endfor %}],
   //   spanGaps: false
-  
+
   // }]
   // }
-  
+
   // var ctx9 = document.getElementById("myChart9").getContext("2d");
-  
-  
+
+
   // var myChart = new Chart(ctx9, {
   // type: 'line',
   // data: chartData9,
@@ -748,11 +752,11 @@ var ctx = document.getElementById('myChart5').getContext('2d');
   //   responsive:true
   // }
   // });
-  
-  
-  
+
+
+
   // // Chart.defaults.global.responsive = false;
-  
+
   // var chartData10 = {
   // labels : [{% for item in labels5 %}
   //          "{{item}}",
@@ -780,13 +784,13 @@ var ctx = document.getElementById('myChart5').getContext('2d');
   //             {{item}},
   //           {% endfor %}],
   //   spanGaps: false
-  
+
   // }]
   // }
-  
+
   // var ctx10 = document.getElementById("myChart10").getContext("2d");
-  
-  
+
+
   // var myChart = new Chart(ctx10, {
   // type: 'line',
   // data: chartData10,
