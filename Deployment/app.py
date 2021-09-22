@@ -158,7 +158,6 @@ def context_processor():
     # values10 = list(df.threat)
 
     
-    # return render_template('dashboard.html', values1=values1, labels1=labels1, legend=legend,values2=values2, legend1=legend1, labels2=labels2, values3=values3,values4=values4, labels3=labels3, values5=values5,values6=values6, labels4=labels4, values7=values7,values8=values8, labels5=labels5, values9=values9,values10=values10)
     return dict(
         values1=values1, labels1=labels1,legend=legend,
         values2=values2,labels2=labels2,
