@@ -6,7 +6,7 @@
 
 <li class="dropdown user user-menu">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-    <i class="fa fa-user-circle" style="color: white; font-size: 1.4em;"></i>
+    <i class="fa fa-user-circle" style="color:#000000; font-size: 1.4em;"></i>
     <span class="hidden-xs">
        {% if current_user.first_name %}
        {{ current_user.first_name }}
@@ -18,8 +18,8 @@
 <ul class="dropdown-menu">
   <!-- User image -->
   <li class="user-header">
-    <i class="fa fa-user-circle" style="color: white; font-size: 7em;"></i>
-    <p>
+    <i class="fa fa-user-circle" style="color:#000000; font-size: 7em;"></i>
+    <p style="color: darkblue;">
        {% if current_user.first_name %}
        {{ current_user.first_name }}
        {% else %}

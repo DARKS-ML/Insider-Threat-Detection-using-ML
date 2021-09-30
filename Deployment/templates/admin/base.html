@@ -32,6 +32,11 @@
   <link href="{{url_for('static',filename='plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}" rel="stylesheet"></link>
   <!-- Flask-admin admin styles -->
   <link href="{{ admin_static.url(filename='admin/css/bootstrap3/admin.css', v='1.1.1') }}" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+   
   {% if admin_view.extra_css %}
   {% for css_url in admin_view.extra_css %}
   <link href="{{ css_url }}" rel="stylesheet">
@@ -56,9 +61,35 @@
 }
 </style>
 </head>
-<body class="hold-transition sidebar-all" >
+<body class="hold-transition skin-white sidebar-all" >
 
   {% block page_body %}
+
+
+  <!--notification dialog box -->
+  <!-- <div id="dialog" title="Email Anamoly Users">
+    <p>{{anamoly_All}}</p>
+  </div> -->
+
+  <div id="dialog1" title="Email Anamoly Users">
+    <p>{{anamoly_email}}</p>
+  </div>
+  
+  <div id="dialog2" title="Device Anamoly Users">
+    <p>{{anamoly_device}}</p>
+  </div>
+  <div id="dialog3" title="Logon Anamoly Users">
+    <p>{{anamoly_user_logon}}</p>
+  </div>
+  
+  <div id="dialog4" title="PC Anamoly Users">
+    <p>{{anamoly_pc_user}}</p>
+  </div>
+
+  <div id="dialog5" title="Psychometric Anamoly Users">
+    <p>{{anamoly_psychometric}}</p>
+  </div>
+
 
   <!-- TOP NAVBAR -->
   <div class="wrapper">
@@ -94,24 +125,35 @@
                 <li>
                   <!-- inner menu: contains the actual data -->
                   <ul class="menu">
-                    <li>
+                    <!-- <li id = "opener">
                       <a href="#">
-                        <i class="fa fa-warning text-yellow"></i> {{email}}  members do email anomaly activity
+                        <i class="fa fa-warning text-yellow"></i> <b>{{All_count}}</b> Users with all anomalies found.
+                      </a>
+                    </li> -->
+                    <li id = "opener1">
+                      <a href="#">
+                        <i class="fa fa-warning text-yellow"></i> <b>{{email_count}}</b> Users with email anomalies found.
                       </a>
                     </li>
-                    <li>
+                    <li id = "opener2">
                       <a href="#">
-                        <i class="fa fa-warning text-yellow"></i> {{devices}}
+                        <i class="fa fa-warning text-yellow"></i> <b>{{device_count}} </b> Users with Device anomalies found.
                       </a>
                     </li>
-                    <li>
+                    <li id="opener3">
                       <a href="#">
-                        <i class="fa fa-warning text-yellow"></i> {{logon}}
+                        <i class="fa fa-warning text-yellow"></i> <b>{{User_logon_count}} </b> Users with logon anomalies found.
                       </a>
                     </li>
-                    <li>
+                    <li id="opener4">
                       <a href="#">
-                        <i class="fa fa-warning text-yellow"></i> {{file}}                      </a>
+                      <i class="fa fa-warning text-yellow"></i> <b>{{pc_count}} </b> Users with pc count anomalies found.
+                      </a>  
+                    </li>
+                    <li id = "opener5">
+                      <a href="#">
+                        <i class="fa fa-warning text-yellow"></i> <b>{{psychometric_count}} </b> Users with psychometric anomalies found.
+                        </a>
                     </li>
 
                   </ul>
@@ -148,7 +190,7 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
           <div class="pull-left image">
-            <i class="fa fa-user-circle" style="color: white; font-size: 2.5em;"></i>
+            <i class="fa fa-user-circle" style="color: #000000; font-size: 2.5em;"></i>
           </div>
           <div class="pull-left info">
             <p>
@@ -169,19 +211,7 @@
         {% block main_menu %}
         {{ layout.menu() }}
         {% endblock %}
-        <li>
-          <a href="#">
-            <i class="fa fa-address-card"></i> <span>Details</span>
-          </a>
-        </li>
-        <!-- <li class="treeview">
-          <a href="#">
-            <i class="fa fa-share"></i> <span>Multilevel</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-        </li> -->
+        
       </ul>
     </section>
     <!-- /.sidebar -->
@@ -200,6 +230,7 @@
 
 
     {% block body %}
+
 
     {% endblock body %}
 
@@ -269,6 +300,7 @@ var d = new Date();
 document.getElementById("demo").innerHTML = d.getFullYear();
 AOS.init();
 </script>
+
 <!-- jQuery 2.2.3 -->
 <script src="{{url_for('static',filename='plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -287,13 +319,9 @@ AOS.init();
 {% endfor %}
 {% endif %}
 
+<script src="{{url_for('static',filename='js/pages/notification.js')}}"></script>
 
-<!-- Bootstrap WYSIHTML5 -->
-<script src="{{url_for('static',filename='plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')}}"></script>
-<!-- Slimscroll -->
-<script src="{{url_for('static',filename='plugins/slimScroll/jquery.slimscroll.min.js')}}"></script>
-
-<!-- Darks App -->
+<!-- yeha -->
 <script src="{{url_for('static',filename='js/app.min.js')}}"></script>
 
 

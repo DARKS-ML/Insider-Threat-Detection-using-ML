@@ -100,73 +100,83 @@ class UserView(MyModelView):
 
 
 
-# class CustomView(BaseView):
-#     @expose('/')
-#     def index(self):
-#         return self.render('admin/custom_index.html')
-
-
-
-
 # Flask views
 @app.route('/')
 def index():
     return render_template('index.html')
 
+
+@app.route('/details')
+@login_required
+def details():
+    return render_template('pages/details.html')
+
+
 @app.context_processor
 def context_processor():
     df = pd.read_csv('output/user_pc_ct.csv')
-    legend = 'USER vs Async Score'
-    legend1 = "User vs Threat Confirmation"
-    labels1 = list(df.user)
-    values1 = list(df.ascore)
+    df2=df.drop_duplicates()
+    legend1 = 'USER vs Async Score(PC Count)'
+    labels1 = list(df2.user)
+    values1 = list(df2.ascore)
+    anamoly_pc_user = list(df2['user'].loc[df2['ascore']<0])
+    pc_count= len(df2.loc[df2['ascore'] < 0 ])
+    # count1 =len((df2.threat)== "[-1]")
     # values2 = list(df.threat)
 
     df = pd.read_csv('output/device_file_full_result.csv')
-    # legend1 = 'USER vs Async Score'
-    legend = "User vs Threat Confirmation"
-    labels2 = list(df.user)
-    values2 = list(df.ascore)
+    df2 = df.drop_duplicates()
+    legend2 = 'USER vs Async Score(Device)'
+    labels2 = list(df2.user)
+    values2 = list(df2.ascore)
+    anamoly_device = list(df2['user'].loc[df2['ascore']<0])
+    device_count= len(df2.loc[df2['ascore'] < 0 ])
     # values4 = list(df.threat)
 
     df = pd.read_csv('output/psychometric_result.csv')
-    # legend = 'USER vs Async Score'
-    legend = "User vs Threat Confirmation"
-    labels3 = list(df.user)
-    values3 = list(df.ascore)
-    # values6 = list(df.threat)
+    df2 = df.drop_duplicates()
+    legend3 = 'USER vs Async Score(psychometric)'
+    labels3 = list(df2.user)
+    values3 = list(df2.ascore)
+    anamoly_psychometric = list(df2['user'].loc[df2['ascore']<0])
+    psychometric_count= len(df2.loc[df2['ascore'] < 0 ])
 
     df = pd.read_csv('output/user_log_result.csv')
-    # legend = 'USER vs Async Score'
-    legend = "User vs Threat Confirmation"
-    labels4 = list(df.user)
-    values4 = list(df.ascore)
-    # values8 = list(df.threat)
+    df2 = df.drop_duplicates()
+    legend4 = 'USER vs Async Score(User logon)'
+    labels4 = list(df2.user)
+    values4 = list(df2.ascore)
+    anamoly_user_logon = list(df2['user'].loc[df2['ascore']<0])
+    User_logon_count= len(df2.loc[df2['ascore'] < 0 ])
+    
 
     df = pd.read_csv('output/all_parameters_result.csv')
-    # legend = 'USER vs Async Score'
-    legend = "User vs Threat Confirmation"
-    labels5 = list(df.user)
-    values5 = list(df.ascore)
-    # values10 = list(df.threat)
+    legend5 = 'USER vs Async Score(all parameter))'
+    labels5 = list(df2.user)
+    values5 = list(df2.ascore)
+    anamoly_email = list(df2['user'].loc[df2['ascore']<0])
+    email_count= len(df2.loc[df2['ascore'] < 0 ])
+    anamoly_All = list(df2['user'].loc[df2['ascore']<0])
+    All_count= len(df2.loc[df2['ascore'] < 0 ])
+    
 
     df = pd.read_csv('output/email_result.csv')
-    # legend = 'USER vs Async Score'
-    legend = "User vs Threat Confirmation"
-    labels6 = list(df.user)
-    values6 = list(df.ascore)
-    # values10 = list(df.threat)
+    df2 = df.drop_duplicates()
+    legend6 = 'USER vs Async Score(email)'
+    labels6 = list(df2.user)
+    values6 = list(df2.ascore)
+    anamoly_email = list(df2['user'].loc[df2['ascore']<0])
+    email_count= len(df2.loc[df2['ascore'] < 0 ])
 
 
     return dict(
-        values1=values1, labels1=labels1,legend=legend,
-        values2=values2,labels2=labels2,
-        values3=values3,labels3=labels3,
-        values4=values4,labels4=labels4,
-        values5=values5, labels5=labels5,
-        values6=values6, labels6=labels6
-        )
-
+        values1=values1, labels1=labels1,legend1=legend1,pc_count=pc_count,anamoly_pc_user=anamoly_pc_user,
+        values2=values2,labels2=labels2,legend2=legend2,device_count= device_count,anamoly_device=anamoly_device,
+        values3=values3,labels3=labels3,legend3=legend3,psychometric_count=psychometric_count,anamoly_psychometric=anamoly_psychometric,
+        values4=values4,labels4=labels4,legend4=legend4,User_logon_count=User_logon_count,anamoly_user_logon=anamoly_user_logon,
+        values5=values5, labels5=labels5,legend5=legend5,All_count=All_count,anamoly_All=anamoly_All,
+        values6=values6, labels6=labels6,legend6=legend6,email_count=email_count,anamoly_email=anamoly_email
+    )
 
 
 
