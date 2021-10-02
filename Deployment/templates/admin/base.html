@@ -36,7 +36,7 @@
 
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
-   
+
   {% if admin_view.extra_css %}
   {% for css_url in admin_view.extra_css %}
   <link href="{{ css_url }}" rel="stylesheet">
@@ -74,14 +74,14 @@
   <div id="dialog1" title="Email Anamoly Users">
     <p>{{anamoly_email}}</p>
   </div>
-  
+
   <div id="dialog2" title="Device Anamoly Users">
     <p>{{anamoly_device}}</p>
   </div>
   <div id="dialog3" title="Logon Anamoly Users">
     <p>{{anamoly_user_logon}}</p>
   </div>
-  
+
   <div id="dialog4" title="PC Anamoly Users">
     <p>{{anamoly_pc_user}}</p>
   </div>
@@ -112,16 +112,16 @@
           <span class="sr-only">Toggle navigation</span>
         </a>
 
-        <div class="navbar-custom-menu custom_color" >
+        <div class="navbar-custom-menu custom_color">
           <ul class="nav navbar-nav">
             <!-- Notifications: style can be found in dropdown.less -->
             <li class="dropdown notifications-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <i class="fa fa-bell-o"></i>
-                <span class="label label-warning">+5</span>
+                <i class="fa fa-bell-o" style="color:red;"></i>
+                <!-- <span class="label label-warning" style="color:red;">.</span>   -->
               </a>
               <ul class="dropdown-menu">
-                <li class="header">You have 5 notifications</li>
+                <li class="header" style="color:red; font-weight:bold;">Notifications</li>
                 <li>
                   <!-- inner menu: contains the actual data -->
                   <ul class="menu">
@@ -148,7 +148,7 @@
                     <li id="opener4">
                       <a href="#">
                       <i class="fa fa-warning text-yellow"></i> <b>{{pc_count}} </b> Users with pc count anomalies found.
-                      </a>  
+                      </a>
                     </li>
                     <li id = "opener5">
                       <a href="#">
@@ -158,14 +158,14 @@
 
                   </ul>
                 </li>
-                <li class="footer"><a href="#">View all</a></li>
+                <!-- <li class="footer"><a href="#">View all</a></li> -->
               </ul>
             </li>
 
             <!-- Control Sidebar Toggle Button -->
-            <li>
+            <!-- <li>
               <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-            </li>
+            </li> -->
             <li>
               {% block access_control %}
               {% endblock %}
@@ -211,7 +211,7 @@
         {% block main_menu %}
         {{ layout.menu() }}
         {% endblock %}
-        
+
       </ul>
     </section>
     <!-- /.sidebar -->
