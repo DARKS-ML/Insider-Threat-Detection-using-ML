@@ -116,7 +116,7 @@ def details():
 def context_processor():
     df = pd.read_csv('output/user_pc_ct.csv')
     df2=df.drop_duplicates()
-    legend1 = 'USER vs Async Score(PC Count)'
+    legend1 = 'USER vs Anomaly Score(PC Count)'
     labels1 = list(df2.user)
     values1 = list(df2.ascore)
     anamoly_pc_user = list(df2['user'].loc[df2['ascore']<0])
@@ -126,7 +126,7 @@ def context_processor():
 
     df = pd.read_csv('output/device_file_full_result.csv')
     df2 = df.drop_duplicates()
-    legend2 = 'USER vs Async Score(Device)'
+    legend2 = 'USER vs Anomaly Score(Device)'
     labels2 = list(df2.user)
     values2 = list(df2.ascore)
     anamoly_device = list(df2['user'].loc[df2['ascore']<0])
@@ -135,7 +135,7 @@ def context_processor():
 
     df = pd.read_csv('output/psychometric_result.csv')
     df2 = df.drop_duplicates()
-    legend3 = 'USER vs Async Score(psychometric)'
+    legend3 = 'USER vs Anomaly Score(psychometric)'
     labels3 = list(df2.user)
     values3 = list(df2.ascore)
     anamoly_psychometric = list(df2['user'].loc[df2['ascore']<0])
@@ -143,7 +143,7 @@ def context_processor():
 
     df = pd.read_csv('output/user_log_result.csv')
     df2 = df.drop_duplicates()
-    legend4 = 'USER vs Async Score(User logon)'
+    legend4 = 'USER vs Anomaly Score(User logon)'
     labels4 = list(df2.user)
     values4 = list(df2.ascore)
     anamoly_user_logon = list(df2['user'].loc[df2['ascore']<0])
@@ -151,7 +151,7 @@ def context_processor():
     
 
     df = pd.read_csv('output/all_parameters_result.csv')
-    legend5 = 'USER vs Async Score(all parameter))'
+    legend5 = 'USER vs Anomaly Score(all parameter))'
     labels5 = list(df2.user)
     values5 = list(df2.ascore)
     anamoly_email = list(df2['user'].loc[df2['ascore']<0])
@@ -162,7 +162,7 @@ def context_processor():
 
     df = pd.read_csv('output/email_result.csv')
     df2 = df.drop_duplicates()
-    legend6 = 'USER vs Async Score(email)'
+    legend6 = 'USER vs Anomaly Score(Email)'
     labels6 = list(df2.user)
     values6 = list(df2.ascore)
     anamoly_email = list(df2['user'].loc[df2['ascore']<0])
