@@ -67,30 +67,7 @@
 
 
   <!--notification dialog box -->
-  <!-- <div id="dialog" title="Email Anamoly Users">
-    <p>{{anamoly_All}}</p>
-  </div> -->
-
-  <div id="dialog1" title="Email Anamoly Users">
-    <p>{{anamoly_email}}</p>
-  </div>
-
-  <div id="dialog2" title="Device Anamoly Users">
-    <p>{{anamoly_device}}</p>
-  </div>
-  <div id="dialog3" title="Logon Anamoly Users">
-    <p>{{anamoly_user_logon}}</p>
-  </div>
-
-  <div id="dialog4" title="PC Anamoly Users">
-    <p>{{anamoly_pc_user}}</p>
-  </div>
-
-  <div id="dialog5" title="Psychometric Anamoly Users">
-    <p>{{anamoly_psychometric}}</p>
-  </div>
-
-
+  
   <!-- TOP NAVBAR -->
   <div class="wrapper">
     {% if current_user.is_authenticated %}
@@ -323,6 +300,7 @@ AOS.init();
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <script src="{{url_for('static',filename='js/app.min.js')}}"></script>
 
 
@@ -330,6 +308,26 @@ AOS.init();
 
 {% block tail %}
 {% endblock tail %}
+
+<div id="dialog1" title="Email Anamoly Users">
+  <p>{{anamoly_email}}</p>
+</div>
+
+<div id="dialog2" title="Device Anamoly Users">
+  <p>{{anamoly_device}}</p>
+</div>
+<div id="dialog3" title="Logon Anamoly Users">
+  <p>{{anamoly_user_logon}}</p>
+</div>
+
+<div id="dialog4" title="PC Anamoly Users">
+  <p>{{anamoly_pc_user}}</p>
+</div>
+
+<div id="dialog5" title="Psychometric Anamoly Users">
+  <p>{{anamoly_psychometric}}</p>
+</div>
+
 
 </body>
 </html>
