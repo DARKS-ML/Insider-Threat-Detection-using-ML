@@ -1,0 +1,390 @@
+{% extends 'admin/master.html' %}
+
+
+{% block body %}
+{{ super() }}
+
+{% if current_user.is_authenticated %}
+
+<!-- Content Header (Page header) -->
+<section class="content-header" >
+  <h1>
+    Dashboard
+    <!-- <small>{{values}}</small> -->
+    <!-- <h3>{{values1}}</h3>  -->
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li class="active">Dashboard</li>
+  </ol>
+</section>
+<section class="content" >
+  <!-- Main row -->
+      <div class="row">
+        <div>
+            <!-- <canvas id="myChart4" style="height: 300px;""></canvas> -->
+            <canvas id="myChart4" style="max-height: 300px;""></canvas>
+
+        </div>
+    <!-- Left col -->
+    <section class="col-lg-7 connectedSortable">
+      <!-- LOgon -->
+      <div class="nav-tabs-custom,">
+        <!-- Tabs within a box -->
+        <ul class="nav nav-tabs pull-left">
+          <div class="box-header">
+            <i class="fa fa-th"></i>
+            <h3 class="box-title">PC Count</h3>
+          </div>
+        </ul>
+        <div class="tab-content no-padding">
+          <!-- anamoly logon -->
+          <canvas id="myChart" style="width: 300px ;max-height: 300px;"></canvas>
+          <!-- <canvas id="myChart" style="max-width: 300px ;max-height: 300px;"></canvas> -->
+
+        </div>
+      </div>
+      <div class="nav-tabs-custom,">
+        <!-- Tabs within a box -->
+        <ul class="nav nav-tabs pull-left">
+          <div class="box-header">
+            <i class="fa fa-th"></i>
+            <h3 class="box-title">Device Graph</h3>
+          </div>
+        </ul>
+        <div class="tab-content no-padding">
+          <canvas id="myChart1" style="width: 300px ;max-height: 300px;"></canvas>
+        </div>
+      </div>
+
+    </section>
+    <!-- /.Left col -->
+    <!-- right col (We are only adding the ID to make the widgets sortable)-->
+    <section class="col-lg-5 custom_color ">
+       <div class="box box-solid custom_color">
+        <div class="box-header">
+          <i class="fa fa-th"></i>
+            <h3 class="box-title" >Psychometric</h3>
+        </div>
+        <div class="box-body">
+          <!-- <div id="chart" style="height: 250px; width: 100%;"></div> -->
+          <canvas id="myChart2" style="width: 300px ;max-height: 300px;" ></canvas>
+        </div>
+      </div>
+      <!-- file graph -->
+      <div class="nav-tabs-custom "></div>
+        <div class="box box-solid custom_color" >
+          <div class="box-header">
+            <i class="fa fa-th"></i>
+            <h3 class="box-title">User logon  </h3>
+          </div>
+          <div class="box-body border-radius-none">
+          <!-- <div class="chart" id="chart" style="height: 250px;"></div> -->
+          <canvas id="myChart3" style="width: 400px ;height: 250px;"></canvas>
+        </div>
+      </div>
+
+    </section>
+    <div class="nav-tabs-custom,">
+      <!-- Tabs within a box -->
+      <ul class="nav nav-tabs pull-left">
+        <div class="box-header" style='float:left;'>
+          <i class="fa fa-th"></i>
+          <h3 class="box-title" >Email Anamoly</h3>
+        </div>
+      </ul>
+
+      <div class="tab-content no-padding">
+        <canvas id="myChart5" style="width: 400px ;max-height: 250px;"></canvas>
+      </div>
+    </div>
+</section>
+<!-- /.content -->
+{% else %}
+<center style="background-color: rgb(21, 21, 61);">
+  <section class="content" style="color: rgb(0, 4, 8)">
+    <div class="col-sm-12">
+      <br><br><br><br><br><br><br><br><br>
+      <h1>DARKS</h1>
+      <p class="lead">
+        Authentication
+      </p>
+      <p>
+        Insider threat detection
+      </p>
+      {% if not current_user.is_authenticated %}
+      <p>You can register as a regular user, or log in as a superuser with the credentials: <br><br>
+
+
+      <p>
+        <a class="btn btn-primary" href="{{ url_for('security.login') }}">Login</a> <a class="btn btn-primary" href="{{ url_for('security.register') }}">Register</a>
+      </p>
+      {% endif %}
+      <br>
+      <!-- <p>
+        <a class="btn btn-primary" href="/"><i class="bi bi-arrow-left-circle-fill"></i>Back</a>
+      </p> -->
+    </div>
+  </section>
+</center>
+{% endif %}
+
+<!-- chartjs -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+
+
+
+<script>
+
+  // console.log('hello')
+  //user pc
+  var ctx = document.getElementById('myChart').getContext('2d');
+  var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: [{% for item in labels1 %}
+           "{{item }}",
+          {% endfor %}],
+        datasets: [{
+            label: '{{ legend1 }}',
+            data: [ {% for item in values1 %}
+                       {{item}},
+                    {% endfor %}],
+
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+  //device file
+  var ctx = document.getElementById('myChart1').getContext('2d');
+  var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: [{% for item in labels2 %}
+           "{{item }}",
+          {% endfor %}],
+        datasets: [{
+            label: '{{ legend2 }}',
+            data: [ {% for item in values2 %}
+                       {{item}},
+                    {% endfor %}],
+
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+//psychometric
+var ctx = document.getElementById('myChart2').getContext('2d');
+  var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: [{% for item in labels3 %}
+           "{{item }}",
+          {% endfor %}],
+        datasets: [{
+            label: '{{ legend3 }}',
+            data: [ {% for item in values3 %}
+                       {{item}},
+                    {% endfor %}],
+
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+var ctx = document.getElementById('myChart3').getContext('2d');
+  var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: [{% for item in labels4 %}
+           "{{item }}",
+          {% endfor %}],
+        datasets: [{
+            label: '{{ legend4 }}',
+            data: [ {% for item in values4 %}
+                       {{item}},
+                    {% endfor %}],
+
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+var ctx = document.getElementById('myChart4').getContext('2d');
+  var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: [{% for item in labels5 %}
+           "{{item }}",
+          {% endfor %}],
+        datasets: [{
+            label: '{{ legend5 }}',
+            data: [ {% for item in values5 %}
+                       {{item}},
+                    {% endfor %}],
+
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+            // xAxes: [{gridLines: { color: "#131c2b" }}],
+        }
+    }
+});
+var ctx = document.getElementById('myChart5').getContext('2d');
+  var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: [{% for item in labels6 %}
+           "{{item }}",
+          {% endfor %}],
+        datasets: [{
+            label: '{{ legend6 }}',
+            data: [ {% for item in values6 %}
+                       {{item}},
+                    {% endfor %}],
+
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+
+  </script>
+{%endblock body%}

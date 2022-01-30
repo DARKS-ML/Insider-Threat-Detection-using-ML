@@ -1,0 +1,333 @@
+{% import 'admin/layout.html' as layout with context -%}
+{% import 'admin/static.html' as admin_static with context %}
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title>{% block title %}{% if admin_view.category %}{{ admin_view.category }} - {% endif %}{{ admin_view.name }} - {{ admin_view.admin.name }}{% endblock title%}</title>
+
+  {% block head_meta %}
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Insider threat detection using machine learning">
+  <meta name="author" content="DARKS">
+  {% endblock head_meta %}
+
+  {% block head_css %}
+  <!-- Bootstrap 3.3.6 -->
+  <link href="{{url_for('static',filename='css/bootstrap.min.css')}}" rel="stylesheet"></link>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link href="{{url_for('static',filename='css/DARKS.min.css')}}" rel="stylesheet"></link>
+  <!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
+  <link href="{{url_for('static',filename='css/skins/_all-skins.min.css')}}" rel="stylesheet"></link>
+  <!-- iCheck -->
+  <link href="{{url_for('static',filename='plugins/iCheck/flat/blue.css')}}" rel="stylesheet"></link>
+
+  <!-- bootstrap wysihtml5 - text editor -->
+  <link href="{{url_for('static',filename='plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}" rel="stylesheet"></link>
+  <!-- Flask-admin admin styles -->
+  <link href="{{ admin_static.url(filename='admin/css/bootstrap3/admin.css', v='1.1.1') }}" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  
+  {% if admin_view.extra_css %}
+  {% for css_url in admin_view.extra_css %}
+  <link href="{{ css_url }}" rel="stylesheet">
+  {% endfor %}
+  {% endif %}
+
+  {% endblock head_css%}
+
+  {% block head %}
+  {% endblock head%}
+
+  {% block head_tail %}
+  {% endblock head_tail%}
+<style>
+/* *,body,h1{
+  background-color: #000000;
+  color:#fff;
+} */
+*,.custom_color,.main-footer{
+    background-color: #f2f2f2;
+    color:#000000;
+}
+</style>
+</head>
+<body class="hold-transition skin-white sidebar-all" >
+
+  {% block page_body %}
+
+
+  <!--notification dialog box -->
+  
+  <!-- TOP NAVBAR -->
+  <div class="wrapper">
+    {% if current_user.is_authenticated %}
+    <header class="main-header">
+      <!-- Logo -->
+      {% block brand %}
+      <a href="{{ admin_view.admin.url }}" class="logo">
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <span class="logo-mini"><b>IT</b></span>
+        <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg"><b>{{ admin_view.admin.name }}</b></span>
+      </a>
+      {% endblock brand%}
+
+      <!-- Header Navbar: style can be found in header.less -->
+      <nav class="navbar navbar-static-top ">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+          <span class="sr-only">Toggle navigation</span>
+        </a>
+
+        <div class="navbar-custom-menu custom_color">
+          <ul class="nav navbar-nav">
+            <!-- Notifications: style can be found in dropdown.less -->
+            <li class="dropdown notifications-menu">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-bell-o" style="color:red;"></i>
+                <!-- <span class="label label-warning" style="color:red;">.</span>   -->
+              </a>
+              <ul class="dropdown-menu">
+                <li class="header" style="color:red; font-weight:bold;">Notifications</li>
+                <li>
+                  <!-- inner menu: contains the actual data -->
+                  <ul class="menu">
+                    <!-- <li id = "opener">
+                      <a href="#">
+                        <i class="fa fa-warning text-yellow"></i> <b>{{All_count}}</b> Users with all anomalies found.
+                      </a>
+                    </li> -->
+                    <li id = "opener1">
+                      <a href="#">
+                        <i class="fa fa-warning text-yellow"></i> <b>{{email_count}}</b> Users with email anomalies found.
+                      </a>
+                    </li>
+                    <li id = "opener2">
+                      <a href="#">
+                        <i class="fa fa-warning text-yellow"></i> <b>{{device_count}} </b> Users with Device anomalies found.
+                      </a>
+                    </li>
+                    <li id="opener3">
+                      <a href="#">
+                        <i class="fa fa-warning text-yellow"></i> <b>{{User_logon_count}} </b> Users with logon anomalies found.
+                      </a>
+                    </li>
+                    <li id="opener4">
+                      <a href="#">
+                      <i class="fa fa-warning text-yellow"></i> <b>{{pc_count}} </b> Users with pc count anomalies found.
+                      </a>
+                    </li>
+                    <li id = "opener5">
+                      <a href="#">
+                        <i class="fa fa-warning text-yellow"></i> <b>{{psychometric_count}} </b> Users with psychometric anomalies found.
+                        </a>
+                    </li>
+
+                  </ul>
+                </li>
+                <!-- <li class="footer"><a href="#">View all</a></li> -->
+              </ul>
+            </li>
+
+            <!-- Control Sidebar Toggle Button -->
+            <!-- <li>
+              <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+            </li> -->
+            <li>
+              {% block access_control %}
+              {% endblock %}
+            </li>
+          </ul>
+
+          {% block menu_links %}
+          <ul class="nav navbar-nav navbar-right">
+            {{ layout.menu_links() }}
+          </ul>
+          {% endblock %}
+
+        </div>
+      </nav>
+    </header>
+    <!-- / TOP NAVBAR -->
+
+    <!-- LEFT MENU -->
+    <aside class="main-sidebar ">
+      <!-- sidebar: style can be found in sidebar.less -->
+      <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <div class="user-panel">
+          <div class="pull-left image">
+            <i class="fa fa-user-circle" style="color: #000000; font-size: 2.5em;"></i>
+          </div>
+          <div class="pull-left info">
+            <p>
+             {% if current_user.first_name -%}
+             {{ current_user.first_name }}
+             {% else -%}
+             {{ current_user.email }}
+             {%- endif %}
+           </p>
+           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+         </div>
+       </div>
+
+  <hr>
+      <!-- sidebar menu: : style can be found in sidebar.less -->
+      <ul class="sidebar-menu" >
+        <h5 class="header" >&nbsp;&nbsp;&nbsp;&nbsp;MAIN NAVIGATION</h5>
+        {% block main_menu %}
+        {{ layout.menu() }}
+        {% endblock %}
+
+      </ul>
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content color white-->
+  <div class="content-wrapper">
+    {% endif %}
+
+    {% block messages %}
+    {{ layout.messages() }}
+    {% endblock messages %}
+
+    {# store the jinja2 context for form_rules rendering logic #}
+    {% set render_ctx = h.resolve_ctx() %}
+
+
+    {% block body %}
+
+
+    {% endblock body %}
+
+    {% if current_user.is_authenticated %}
+  </div>
+  <!-- / Content Wrapper. color white -->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar ">
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <!-- Settings tab content -->
+        <form method="post">
+          <h3 class="control-sidebar-heading">General Settings</h3>
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Show me as online
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+          </div>
+          <!-- /.form-group -->
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Turn off notifications
+              <input type="checkbox" class="pull-right">
+            </label>
+          </div>
+          <!-- /.form-group -->
+        </form>
+        <h3 class="control-sidebar-heading">Recent Activity</h3>
+        <ul class="control-sidebar-menu">
+          <li>
+            <a href="javascript:void(0)">
+              <i class="menu-icon fa fa-users bg-red"></i>
+
+              <div class="menu-info">
+                <h4 class="control-sidebar-subheading">#####</h4>
+
+                <p>############</p>
+              </div>
+            </a>
+          </li>
+        </ul>
+        <!-- /.control-sidebar-menu -->
+      <!-- /.tab-pane -->
+  </aside>
+  <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
+  immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+
+  <footer class="main-footer">
+    <center> <strong>Copyright &copy; <a href="#">DARKS</a>-<span id="demo"></span></strong>   <br>Version</b> 1.0</center>
+  </footer>
+  {% endif %}
+
+</div>
+<!-- ./wrapper -->
+
+{% endblock page_body%}
+
+{% block tail_js %}
+
+<script>
+var d = new Date();
+document.getElementById("demo").innerHTML = d.getFullYear();
+AOS.init();
+</script>
+
+<!-- jQuery 2.2.3 -->
+<script src="{{url_for('static',filename='plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button);
+</script>
+<!-- Bootstrap 3.3.6 -->
+<script src="{{url_for('static',filename='js/bootstrap.min.js')}}"></script>
+<!-- <script src="{{ admin_static.url(filename='vendor/select2/select2.min.js', v='3.5.2') }}" type="text/javascript"></script> -->
+
+{% if admin_view.extra_js %}
+{% for js_url in admin_view.extra_js %}
+<script src="{{ js_url }}" type="text/javascript"></script>
+{% endfor %}
+{% endif %}
+
+<script src="{{url_for('static',filename='js/pages/notification.js')}}"></script>
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script src="{{url_for('static',filename='js/app.min.js')}}"></script>
+
+
+{% endblock tail_js%}
+
+{% block tail %}
+{% endblock tail %}
+
+<div id="dialog1" title="Email Anamoly Users">
+  <p>{{anamoly_email}}</p>
+</div>
+
+<div id="dialog2" title="Device Anamoly Users">
+  <p>{{anamoly_device}}</p>
+</div>
+<div id="dialog3" title="Logon Anamoly Users">
+  <p>{{anamoly_user_logon}}</p>
+</div>
+
+<div id="dialog4" title="PC Anamoly Users">
+  <p>{{anamoly_pc_user}}</p>
+</div>
+
+<div id="dialog5" title="Psychometric Anamoly Users">
+  <p>{{anamoly_psychometric}}</p>
+</div>
+
+
+</body>
+</html>
